@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CalculatorScreen from "./Screen.vue";
 
 </script>
 
@@ -7,7 +8,7 @@
     <h1 class="green">Vue Calculator</h1>
   </div>
   <div class="calculator-grid">
-    <div class="calculator-screen"></div>
+    <CalculatorScreen :text="screenTxt" class="calculator-screen"/>
     <button id="clear" class="button std">Clear</button>
     <button id="div" class="button std">/</button>
     <button id="mult" class="button std">*</button>
