@@ -56,10 +56,13 @@ h3 {
   grid-row: 1/2;
   grid-column: 1/5;
 }
-
+#plus {
+  grid-row: 3/5;
+  grid-column: 4;
+}
 #result {
   grid-column: 4;
-  grid-row: 4/5;
+  grid-row: 5/7;
 }
 
 #zero {
@@ -72,7 +75,7 @@ h3 {
     width: 5em;
     height: 5em;
   }
-  &.high {
+  /* &.high {
     width: 5em;
     height: 10em;
   }
@@ -80,7 +83,7 @@ h3 {
   &.wide {
     width: 10em;
     height: 5em;
-  }
+  } */
 }
 
 @media (min-width: 1024px) {
