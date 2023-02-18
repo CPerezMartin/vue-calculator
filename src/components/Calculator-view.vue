@@ -1,33 +1,53 @@
-<script setup lang="ts">
-import CalculatorScreen from "./Screen.vue";
-
-</script>
-
 <template>
   <div class="greetings">
     <h1 class="green">Vue Calculator</h1>
   </div>
   <div class="calculator-grid">
-    <CalculatorScreen :text="screenTxt" class="calculator-screen"/>
-    <button id="clear" class="button std">Clear</button>
-    <button id="div" class="button std">/</button>
-    <button id="mult" class="button std">*</button>
-    <button id="minus" class="button std">-</button>
-    <button v-for="number in ['7', '8', '9']" :key="number" class="button std">
+    <CalculatorScreen :text="operate.memory.value" class="calculator-screen" />
+    <button id="clear" class="button std" @click="operate.clear()">
+      Clear
+    </button>
+    <button id="div" class="button std" @click="operate.addOperator('/')">/</button>
+    <button id="mult" class="button std" @click="operate.addOperator('*')">*</button>
+    <button id="minus" class="button std" @click="operate.addOperator('-')">-</button>
+    <button
+      v-for="number in ['7', '8', '9']"
+      :key="number"
+      class="button std"
+      @click="operate.addDigit(number)"
+    >
       {{ number }}
     </button>
-    <button id="plus" class="button high">+</button>
-    <button v-for="number in ['4', '5', '6']" :key="number" class="button std">
+    <button id="plus" class="button" @click="operate.addOperator('+')">+</button>
+    <button
+      v-for="number in ['4', '5', '6']"
+      :key="number"
+      class="button std"
+      @click="operate.addDigit(number)"
+    >
       {{ number }}
     </button>
-    <button v-for="number in ['1', '2', '3']" :key="number" class="button std">
+    <button
+      v-for="number in ['1', '2', '3']"
+      :key="number"
+      class="button std"
+      @click="operate.addDigit(number)"
+    >
       {{ number }}
     </button>
-    <button id="result" class="button high">=</button>
-    <button id="zero" class="button wide">0</button>
-    <button id="period" class="button std">.</button>
+    <button id="result" class="button high" @click="operate.calculate()">=</button>
+    <button id="zero" class="button wide" @click="operate.addDigit('0')">0</button>
+    <button id="period" class="button std" @click="operate.addDigit('.')">.</button>
+    <button id="del" class="button" @click="operate.deleteLast()">Del</button>
   </div>
 </template>
+
+<script setup lang="ts">
+import CalculatorScreen from "@/components/Screen.vue";
+import { useOperate } from "@/compositions/useOperate";
+
+const operate = useOperate();
+</script>
 
 <style lang="scss" scoped>
 h1 {
@@ -52,18 +72,18 @@ h3 {
 }
 .calculator-screen {
   border: 1px black solid;
-  height: 5em;
+  height: 5rem;
 
   grid-row: 1/2;
   grid-column: 1/5;
 }
 #plus {
-  grid-row: 3/5;
+  /* grid-row: 3/5; */
   grid-column: 4;
 }
 #result {
   grid-column: 4;
-  grid-row: 5/7;
+  grid-row: 4/6;
 }
 
 #zero {

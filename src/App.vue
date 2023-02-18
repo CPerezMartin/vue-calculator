@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import Calculator from './components/Calculator-view.vue'
+import Calculator from "./components/Calculator-view.vue";
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="./assets/logo.svg"
+      width="125"
+      height="125"
+    />
   </header>
   <div class="wrapper">
     <Calculator />
