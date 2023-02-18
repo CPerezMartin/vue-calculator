@@ -2,11 +2,11 @@
   <div class="body" v-text="text"></div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, readonly } from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
   name: "CalculatorScreen",
   props: {
-    text: { default: "" },
+    text: { default: "0" },
   },
 });
 </script>

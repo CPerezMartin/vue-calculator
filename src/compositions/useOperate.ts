@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { OPERATORS, DIGITS } from "@/shared/constants";
 
 export function useOperate() {
-  const memory = ref("");
+  const memory = ref("0");
   const error = ref(false);
   const clearNext = ref(false);
 
@@ -36,7 +36,7 @@ export function useOperate() {
 
     if (memory.value === "0" && digit === "0") return;
     if (lastDigit === "." && digit === ".") return;
-    if (memory.value === "0" && memory.value.length === 1) {
+    if (memory.value === "0" && memory.value.length === 1 && digit !== ".") {
       memory.value = digit;
     } else {
       if (clearNext.value) clear();
