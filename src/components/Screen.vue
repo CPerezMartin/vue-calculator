@@ -7,18 +7,26 @@ export default defineComponent({
   name: "CalculatorScreen",
   props: {
     text: { default: "0" },
+    error: { default: false },
   },
 });
 </script>
 <style lang="scss" scoped>
+@import "@/assets/colors.scss";
 .body {
+  width: 14em;
   display: flex;
   justify-items: end;
-  border-radius: 2%;
+  background-color: aliceblue;
+  border-radius: 5px;
+  color: $dark-vue-green;
   font-weight: bold;
   font-size: 2em;
-  padding: 0 0.25em;
+  padding: 0.1em 0.25em;
+  line-height: 1em;
   justify-content: flex-end;
   align-items: flex-end;
+  overflow: hidden;
+  overflow-wrap: anywhere;
 }
 </style>

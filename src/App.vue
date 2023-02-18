@@ -11,13 +11,15 @@ import Calculator from "./components/Calculator-view.vue";
       width="125"
       height="125"
     />
+    <h1 class="title">Vue Calculator</h1>
   </header>
   <div class="wrapper">
     <Calculator />
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/colors.scss";
 header {
   line-height: 1.5;
 }
@@ -27,21 +29,23 @@ header {
   margin: 0 auto 2rem;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+header {
+  display: flex;
+  place-items: center;
+  .title {
+    font-weight: bolder;
+    font-size: 30px;
+    color: $light-vue-green;
   }
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.logo {
+  margin: 0 2rem 0 0;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+header .wrapper {
+  display: flex;
+  place-items: flex-start;
+  flex-wrap: wrap;
 }
 </style>

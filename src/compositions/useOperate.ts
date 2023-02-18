@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { OPERATORS, DIGITS } from "@/shared/constants";
+import { OPERATORS } from "@/shared/constants";
 
 export function useOperate() {
   const memory = ref("0");
@@ -8,18 +8,19 @@ export function useOperate() {
 
   function clear() {
     memory.value = "0";
+    error.value = false;
     clearNext.value = false;
   }
 
   function deleteLast() {
     if (!memory.value.length) return;
-
-    memory.value = memory.value.slice(0, memory.value.length - 1);
-    clearNext.value = false;
-  }
-
-  function isDigit(digit: string) {
-    return DIGITS.includes(digit);
+    if (memory.value.length === 1) {
+      clear();
+    } else {
+      memory.value = memory.value.slice(0, memory.value.length - 1);
+      clearNext.value = false;
+      error.value = false;
+    }
   }
 
   function isOperator(operator: string) {
@@ -34,12 +35,12 @@ export function useOperate() {
   function addDigit(digit: string) {
     const lastDigit = memory.value[memory.value.length - 1];
 
+    if (clearNext.value) clear();
     if (memory.value === "0" && digit === "0") return;
     if (lastDigit === "." && digit === ".") return;
     if (memory.value === "0" && memory.value.length === 1 && digit !== ".") {
       memory.value = digit;
     } else {
-      if (clearNext.value) clear();
       if (
         (!memory.value || lastCharIsOperator(memory.value)) &&
         digit === "."
@@ -51,12 +52,16 @@ export function useOperate() {
   }
 
   function addOperator(operator: string) {
-    if (!memory.value && operator !== "-") return;
-    if (memory.value === "-") return;
-    if (lastCharIsOperator(memory.value)) {
-      memory.value = memory.value.slice(0, memory.value.length - 1);
+    if (clearNext.value) {
+      clear();
+    } else {
+      if (!memory.value && operator !== "-") return;
+      if (memory.value === "-") return;
+      if (lastCharIsOperator(memory.value)) {
+        memory.value = memory.value.slice(0, memory.value.length - 1);
+      }
+      memory.value += `${operator}`;
     }
-    memory.value += `${operator}`;
   }
 
   function calculate() {
@@ -69,6 +74,7 @@ export function useOperate() {
       memory.value = `${eval(memory.value)}`;
     } catch (_) {
       error.value = true;
+      clearNext.value = true;
       memory.value = "Expression invalid";
     }
   }
