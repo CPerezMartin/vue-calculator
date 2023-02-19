@@ -3,7 +3,7 @@
     <CalculatorScreen
       :text="operate.memory.value"
       class="calculator-screen"
-      :class="{ error: 'operate.error.value' }"
+      :error="operate.error.value"
     />
     <button id="clear" class="button std invert-color" @click="operate.clear()">
       Clear
@@ -84,6 +84,9 @@ h3 {
 
   grid-row: 1/2;
   grid-column: 1/5;
+  &.error {
+    border-color: red;
+  }
 }
 #plus {
   grid-column: 4;

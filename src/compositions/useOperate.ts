@@ -13,6 +13,9 @@ export function useOperate() {
   }
 
   function deleteLast() {
+    if (error.value) {
+      clear();
+    }
     if (!memory.value.length) return;
     if (memory.value.length === 1) {
       clear();
@@ -81,6 +84,7 @@ export function useOperate() {
 
   return {
     memory,
+    error,
     deleteLast,
     addDigit,
     addOperator,

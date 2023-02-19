@@ -1,5 +1,5 @@
 <template>
-  <div class="body" v-text="text"></div>
+  <div class="body" v-text="text" :class="{ error: error }"></div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
